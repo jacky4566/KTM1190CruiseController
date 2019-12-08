@@ -1,0 +1,44 @@
+Component,Description,Part,References,Value,Footprint,Quantity Per PCB,Digikey P/N,Cost @10,Expanded cost
+1,"Unpolarized capacitor, small symbol",C_Small,C1 C2 C3 C7 C9 C14 C15 C18 C20 C21,0.1uF,C_0603_1608Metric,10,1276-6582-1-ND, $0.0254 , $0.2540 
+2,"Unpolarized capacitor, small symbol",C_Small,C4 C5 C12 C13 C22,10nF,C_0603_1608Metric,5,1276-6531-1-ND, $0.0490 , $0.2450 
+3,"Unpolarized capacitor, small symbol",C_Small,C6 C8,1uF,C_0603_1608Metric,2,1276-6617-1-ND, $0.1192 , $0.2384 
+4,"Unpolarized capacitor, small symbol",C_Small,C10,4.7uF,C_0805_2012Metric,1,1276-6783-1-ND, $0.3600 , $0.3600 
+5,"Unpolarized capacitor, small symbol",C_Small,C16 C17,8pF,C_0603_1608Metric,2,1276-6519-1-ND, $0.2360 , $0.4720 
+6,,155124M173200-VeridianDesigns,D1,155124M173200,LED_155124M173200,1,732-11414-1-ND, $0.5862 , $0.5862 
+7,"Schottky diode, small symbol",D_Schottky_Small,D2 D3,D_Schottky_Small,D_SOD-123,2,497-17154-1-ND, $0.2362 , $0.4724 
+8,"Resettable fuse, polymeric positive temperature coefficient, small symbol",Polyfuse_Small,F1,200mA,R_1206_3216Metric,1,F2109TR-ND, $0.5071 , $0.5071 
+9,"Generic connector, double row, 02x09, top/bottom pin numbering scheme (row 1: 1...pins_per_row, row2: pins_per_row+1 ... num_pins), script generated (kicad-library-utils/schlib/autogen/connector/)",Conn_02x09_Top_Bottom,J2,Conn_02x09_Top_Bottom,MX23A18NF1,1,670-2462-ND, $10.3800 , $10.3800 
+10,USB Micro Type B connector,USB_B_Micro,J1,USB_B_Micro,CONN_2173157-3,1,A124356TR-ND, $4.9780 , $4.9780 
+11,"Resistor, small symbol",R_Small,R1 R2 R3 R4 R5 R6 R7 R11 R12 R13 R14,10k,R_0603_1608Metric,11,P10KDBCT-ND, $0.1793 , $1.9723 
+12,"Resistor, small symbol",R_Small,R8,120,R_0603_1608Metric,1,P120BZCT-ND, $0.1450 , $0.1450 
+13,"Resistor, small symbol",R_Small,R15 R16 R17 R26,1k,R_0603_1608Metric,4,CR0603-JW-102ELFCT-ND, $0.0210 , $0.0840 
+14,"Resistor, small symbol",R_Small,R18 R19 R20,2.2k,R_0603_1608Metric,3,P2.2KGCT-ND, $0.0660 , $0.1980 
+15,"Resistor, small symbol",R_Small,R23 R24,27,R_0603_1608Metric,2,P27.00BYCT-ND, $0.1940 , $0.3880 
+16,"Resistor, small symbol",R_Small,R25,75,R_0603_1608Metric,1,P75.0HCT-ND, $0.0870 , $0.0870 
+17,"High-Speed CAN Transceiver, 1Mbps, 5V supply, Vio pin, -40C to +125C, DFN8 package",MCP2562-E-MF,U6,MCP2562-E-MF,DFN-8-1EP_3x3mm_P0.65mm_EP1.55x2.4mm,1,MCP2562-E/MF-ND, $1.4200 , $1.4200 
+18,,MIC5225,U5,MIC5225,SOT-23-5,1,576-2980-1-ND, $0.6000 , $0.6000 
+19,"ARM Cortex-M4 MCU, 256KB flash, 64KB RAM, 80MHz, 1.71-3.6V, 38 GPIO, UFQFPN-48",STM32L433CCUx,U7,STM32L433CCUx,QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm,1,497-16580-ND, $7.8280 , $7.8280 
+20,,TLV9064IRTER-VeridianDesigns,U3,TLV9064IRTER,QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm,1,296-51830-1-ND, $2.1660 , $2.1660 
+21,,TS5A23157RSER-VeridianDesigns,U4,TS5A23157RSER,Texas_S-PVSON-N10,1,296-21919-2-ND, $1.0970 , $1.0970 
+22,Two pin crystal,Crystal,Y1,32.768,Crystal_SMD_G8-2Pin_3.2x1.5mm,1,535-9537-1-ND, $1.2150 , $1.2150 
+,,,,,,,,,
+,,Bare Board,,,,1,, $3.1600 , $3.1600 
+,,Assembly,,,,1,, $15.0000 , $15.0000 
+,,Assembly shipping,,,,1,, $1.0000 , $1.0000 
+,,,,,,,,,
+Connectors,,,,,,,,,
+1,,,,HM-4P,,1,, $3.0100 , $3.0100 
+2,,,,MT-6P-2,,2,, $3.1300 , $6.2600 
+3,,,,MT-6S-2,,3,, $2.0600 , $6.1800 
+4,,,CONN SOCKET HOUSING 18POS,MX23A18SF1,,1,670-2463-ND, $7.28 , $7.28 
+4a,,,CONN SOCKET 16-22AWG CRIMP TIN,M23S05K351,,18,670-1682-1-ND,0.153, $2.75 
+,,,,,,,,,
+Wire,,,,20 AWG,,4,, $1.0000 , $4.0000 
+Seliving,,,,Orange!,,4,, $0.2500 , $1.0000 
+Case and Epoxy,,,,,,1,, $2.0000 , $2.0000 
+,,,,,,,,,
+,,,,,,,,,
+KTM switches,,,,,,1,, $100.0000 , $100.0000 
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,, $187.332 
