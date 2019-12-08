@@ -1119,8 +1119,8 @@ F 3 "" H 7150 5475 50  0001 C CNN
 	1    7150 5475
 	1    0    0    -1  
 $EndComp
-Text Notes 5525 5200 0    50   ~ 0
-Power Budget\nSTM32: 10mA\nTLV9064: 40mA ea + 2mAQc\nMCP2562: 10mA\nRGB: 30mA\n
+Text Notes 5000 5425 0    50   ~ 0
+Power Budget (Target)\nSTM32:    10mA (1-2mA)\nTLV9064:  40mA ea + 2mAQc (6mA)\nMCP2562: 10mA (5mA)\nRGB:      30mA (Varies)\n
 $Comp
 L Device:R_Small R8
 U 1 1 5DE989C9
