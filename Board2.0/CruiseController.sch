@@ -784,17 +784,6 @@ F 3 "~" H 4325 6575 50  0001 C CNN
 	1    4325 6575
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R_Small R17
-U 1 1 5DD8A0BC
-P 4525 6575
-F 0 "R17" V 4575 6425 50  0000 C CNN
-F 1 "1k" V 4600 6575 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 4525 6575 50  0001 C CNN
-F 3 "~" H 4525 6575 50  0001 C CNN
-	1    4525 6575
-	1    0    0    -1  
-$EndComp
 Text Label 7650 1725 0    50   ~ 0
 RST
 Wire Wire Line
@@ -827,8 +816,6 @@ Wire Wire Line
 	4625 4400 4850 4400
 Text GLabel 2025 3300 0    50   Input ~ 0
 TTAIN
-Text GLabel 8075 4225 0    50   Input ~ 0
-LEDDATA
 Text GLabel 8075 3125 0    50   Input ~ 0
 BUTTONMID
 Wire Wire Line
@@ -1356,42 +1343,82 @@ Connection ~ 5150 4600
 Connection ~ 5150 4400
 Wire Wire Line
 	5150 4400 5275 4400
-$Comp
-L VeridianDesigns:IN-PI42TASPRPGPB D1
-U 1 1 5DF2449D
-P 8375 5550
-F 0 "D1" H 8558 6125 50  0000 C CNN
-F 1 "IN-PI42TASPRPGPB" H 8558 6034 50  0000 C CNN
-F 2 "VeridianDesigns:IN-PI42TASPRPGPB" H 8125 5450 50  0001 C CNN
-F 3 "http://www.inolux-corp.com/datasheet/SMDLED/Addressable%20LED/IN-PI42TAS(X)R(X)G(X)B_v1.1.pdf" H 8375 5550 50  0001 C CNN
-	1    8375 5550
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	4900 1825 4925 1825
 Wire Wire Line
 	4750 2025 4925 2025
 Wire Wire Line
 	4750 1825 4925 1825
-Text GLabel 8725 5200 2    50   Input ~ 0
-REGIN
-NoConn ~ 9275 3525
-NoConn ~ 9275 3625
-Text GLabel 8725 5300 2    50   Input ~ 0
-LEDDATA
-NoConn ~ 8725 5400
-$Comp
-L power:GND #PWR0102
-U 1 1 5DF3C139
-P 8725 5500
-F 0 "#PWR0102" H 8725 5250 50  0001 C CNN
-F 1 "GND" H 8730 5327 50  0000 C CNN
-F 2 "" H 8725 5500 50  0001 C CNN
-F 3 "" H 8725 5500 50  0001 C CNN
-	1    8725 5500
-	1    0    0    -1  
-$EndComp
 Connection ~ 2050 1175
 Wire Wire Line
 	2050 1175 2350 1175
+$Comp
+L CruiseController-rescue:155124M173200-VeridianDesigns-CruiseController-rescue D1
+U 1 1 5DF31D3A
+P 8650 5400
+F 0 "D1" H 8650 4973 50  0000 C CNN
+F 1 "155124M173200-VeridianDesigns-CruiseController-rescue" H 8650 5064 50  0000 C CNN
+F 2 "LED_155124M173200" H 8950 5650 50  0001 L BNN
+F 3 "Wurth Electronics" H 8950 5550 50  0001 L BNN
+	1    8650 5400
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_Small R17
+U 1 1 5DD8A0BC
+P 4525 6575
+F 0 "R17" V 4575 6425 50  0000 C CNN
+F 1 "1k" V 4600 6575 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 4525 6575 50  0001 C CNN
+F 3 "~" H 4525 6575 50  0001 C CNN
+	1    4525 6575
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R9
+U 1 1 5DF42CF0
+P 9050 5200
+F 0 "R9" V 8975 5175 50  0000 C CNN
+F 1 "27" V 9050 5200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9050 5200 50  0001 C CNN
+F 3 "~" H 9050 5200 50  0001 C CNN
+	1    9050 5200
+	0    1    1    0   
+$EndComp
+Text GLabel 8350 5400 0    50   Input ~ 0
+3V3
+$Comp
+L Device:R_Small R10
+U 1 1 5DF44B2A
+P 9050 5400
+F 0 "R10" V 8975 5375 50  0000 C CNN
+F 1 "27" V 9050 5400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9050 5400 50  0001 C CNN
+F 3 "~" H 9050 5400 50  0001 C CNN
+	1    9050 5400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small R21
+U 1 1 5DF45121
+P 9050 5600
+F 0 "R21" V 8975 5575 50  0000 C CNN
+F 1 "75" V 9050 5600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9050 5600 50  0001 C CNN
+F 3 "~" H 9050 5600 50  0001 C CNN
+	1    9050 5600
+	0    1    1    0   
+$EndComp
+Text GLabel 9150 5200 2    50   Input ~ 0
+LEDB
+Text GLabel 9150 5400 2    50   Input ~ 0
+LEDG
+Text GLabel 9150 5600 2    50   Input ~ 0
+LEDR
+Text GLabel 9275 3625 2    50   Input ~ 0
+LEDR
+Text GLabel 9275 3525 2    50   Input ~ 0
+LEDG
+Text GLabel 8075 4225 0    50   Input ~ 0
+LEDB
 $EndSCHEMATC
