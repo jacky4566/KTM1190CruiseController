@@ -29,8 +29,7 @@ typedef struct{
 	uint8_t  len;
 } CAN_msg_t;
 
-typedef const struct
-{
+typedef const struct{
 	uint8_t TS2;
 	uint8_t TS1;
 	uint8_t BRP;
