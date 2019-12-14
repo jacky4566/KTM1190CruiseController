@@ -2,7 +2,7 @@
 #include "stm32l4_timer.h"
 
 stm32l4_dma_t stm32l4_DAC_DMA;
-static stm32l4_timer_t stm32l4_DAC_timer;
+stm32l4_timer_t stm32l4_DAC_timer;
 
 static int DACresolution = 12;
 
@@ -22,7 +22,7 @@ void setup() {
 
   //Setup timer 7 to trigger arbitraty 1MHz (@80MHZ)
   stm32l4_timer_create(&stm32l4_DAC_timer, TIMER_INSTANCE_TIM7, NULL, 0);
-  stm32l4_timer_enable(&stm32l4_DAC_timer, (stm32l4_timer_clock(&stm32l4_DAC_timer) / 4000000) - 1, 4, TIMER_OPTION_COUNT_PRELOAD, NULL, NULL, 0);
+  stm32l4_timer_enable(&stm32l4_DAC_timer, (stm32l4_timer_clock(&stm32l4_DAC_timer) / 4000000) - 1, 4 - 1, TIMER_OPTION_COUNT_PRELOAD, NULL, NULL, 0);
   
   //Setup DMA to transfer into DAC
   stm32l4_dma_create(&stm32l4_DAC_DMA, DMA_CHANNEL_DMA1_CH3_DAC1, DMA_OPTION_PRIORITY_MEDIUM);

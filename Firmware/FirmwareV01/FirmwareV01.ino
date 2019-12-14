@@ -1,4 +1,7 @@
 #include <PID_v1.h>
+#include <Bounce2.h>
+#include <elapsedMillis.h>
+#include <EEPROM.h>
 
 //Pins
 const int pinAnalogA = 0;
@@ -8,6 +11,11 @@ const int pinOutputB = PIN_DAC1;
 const int pinRedLED = 3;
 const int pinGreenLED = 4;
 const int pinBlueLED = 5;
+
+//buttons
+Bounce debouncerUP = Bounce();
+Bounce debouncerDOWN = Bounce();
+Bounce debouncerCENTRE = Bounce();
 
 //Tunable variables
 const uint32_t maxRPM = 0x5000;
@@ -36,25 +44,78 @@ uint32_t outputB;
 //PID
 PID cruisePID(&wheelSpeed, &outputThrottle, &cruiseSetSpeed, Kp, Ki, Kd, DIRECT);
 
+//EEPROM
+struct configurationFile {
+  uint16_t TPSAMAX;
+  uint16_t TPSAMIN;
+  uint16_t TPSBMAX;
+  uint16_t TPSBMIN;
+  uint16_t ConfigDone;
+} currentConfig;
+
 void setup() {
-  Serial.begin(9600);
+  //Pin IO
+  debouncerUP.attach(BUTTON_PIN);
+  debouncerUP.interval(5);
+  debouncerDOWN.attach(BUTTON_PIN);
+  debouncerDOWN.interval(5);
+  debouncerMID.attach(BUTTON_PIN);
+  debouncerMID.interval(5);
   analogReadPeriod(2); //2 is default, can be lengthened for smoothing
   analogReadResolution(12);
   analogWriteResolution(12);
+
+  //Comms
+  Serial.begin(9600);
+
+  //Math
   cruisePID.SetMode(AUTOMATIC);
   cruisePID.SetSampleTime(100);
-  cruisePID.SetOutputLimits(40,3000);
+
+  //check for setup mode
+  debouncerMID.update();
+  if (debouncerMID.read() == LOW) {
+    elapsedMillis setupTimer;
+    while (debouncerMID.read() == LOW && setupTimer < 5000) {
+      LEDupdate(setupTimer % 0x3ff, 0, 0); //pulse red
+      debouncerMID.update();
+      delayMicroseconds(10);
+    }
+    if (setupTimer >= 5000) { //pin was held long enough for setup mode
+      setupMode();
+    }
+  }
+
+  //EEPROM
+  configINIT();
 }
 
 void loop() {
-  inputReads();
-  if (cruiseEnabled && (error == 0)) {
-    computeCruiseOutputs();
-  } else {
-    computeNormalOutputs();
+  readAnalogs();
+  UIprocessor();
+  Cruiseprocessor();
+  calcOutputs();
+}
+
+void configINIT() {
+  configurationFile storedConfig;
+  EEPROM.get(0, storedConfig);
+  if (storedConfig.ConfigDone !=  0x0f7f) { //no configuration set
+    while (1) { //Error, no config set!
+      LEDupdate(0x3FF, 0, 0);
+      delay(500);
+      LEDupdate(0, 0, 0);
+      delay(500);
+    }
+  }else{
+    currentConfig = storedConfig; //good to go
   }
-  analogWrites();
-  errorPrinter();
+}
+
+void LEDupdate(uint32_t R, uint32_t G, uint32_t B) {
+  analogWrite(pinRedLED, R % 0x3FF);
+  analogWrite(pinGreenLED, G % 0x3FF);
+  analogWrite(pinBlueLED, B & 0x3FF);
 }
 
 void computeCruiseOutputs() {
