@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:CruiseController-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
@@ -324,8 +324,8 @@ $Comp
 L Device:C_Small C10
 U 1 1 5DC7A988
 P 6325 4500
-F 0 "C10" H 6600 4650 50  0000 R CNN
-F 1 "4.7uF" H 6650 4725 50  0000 R CNN
+F 0 "C10" H 6425 4800 50  0000 R CNN
+F 1 "4.7uF" H 6475 4900 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" H 6325 4500 50  0001 C CNN
 F 3 "~" H 6325 4500 50  0001 C CNN
 	1    6325 4500
@@ -1333,17 +1333,6 @@ Connection ~ 2050 1175
 Wire Wire Line
 	2050 1175 2350 1175
 $Comp
-L CruiseController-rescue:155124M173200-VeridianDesigns-CruiseController-rescue D1
-U 1 1 5DF31D3A
-P 9225 6175
-F 0 "D1" H 9225 5748 50  0000 C CNN
-F 1 "155124M173200-VeridianDesigns-CruiseController-rescue" H 9225 5839 50  0000 C CNN
-F 2 "LED_155124M173200" H 9525 6425 50  0001 L BNN
-F 3 "Wurth Electronics" H 9525 6325 50  0001 L BNN
-	1    9225 6175
-	-1   0    0    1   
-$EndComp
-$Comp
 L Device:R_Small R17
 U 1 1 5DD8A0BC
 P 4525 6575
@@ -1355,49 +1344,32 @@ F 3 "~" H 4525 6575 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Small R9
-U 1 1 5DF42CF0
-P 9625 5975
-F 0 "R9" V 9550 5950 50  0000 C CNN
-F 1 "27" V 9625 5975 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 9625 5975 50  0001 C CNN
-F 3 "~" H 9625 5975 50  0001 C CNN
-	1    9625 5975
-	0    1    1    0   
-$EndComp
-Text GLabel 8925 6175 0    50   Input ~ 0
-3V3
-$Comp
 L Device:R_Small R10
 U 1 1 5DF44B2A
-P 9625 6175
-F 0 "R10" V 9550 6150 50  0000 C CNN
-F 1 "27" V 9625 6175 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 9625 6175 50  0001 C CNN
-F 3 "~" H 9625 6175 50  0001 C CNN
-	1    9625 6175
-	0    1    1    0   
+P 9050 6075
+F 0 "R10" V 8975 6050 50  0000 C CNN
+F 1 "27" V 9050 6075 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9050 6075 50  0001 C CNN
+F 3 "~" H 9050 6075 50  0001 C CNN
+	1    9050 6075
+	0    -1   1    0   
 $EndComp
 $Comp
 L Device:R_Small R21
 U 1 1 5DF45121
-P 9625 6375
-F 0 "R21" V 9550 6350 50  0000 C CNN
-F 1 "75" V 9625 6375 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 9625 6375 50  0001 C CNN
-F 3 "~" H 9625 6375 50  0001 C CNN
-	1    9625 6375
-	0    1    1    0   
+P 9050 5875
+F 0 "R21" V 8975 5850 50  0000 C CNN
+F 1 "85" V 9050 5875 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9050 5875 50  0001 C CNN
+F 3 "~" H 9050 5875 50  0001 C CNN
+	1    9050 5875
+	0    -1   1    0   
 $EndComp
-Text GLabel 9725 5975 2    50   Input ~ 0
-LEDB
-Text GLabel 9725 6175 2    50   Input ~ 0
-LEDG
-Text GLabel 9725 6375 2    50   Input ~ 0
-LEDR
-Text GLabel 9275 3625 2    50   Input ~ 0
+Text GLabel 8950 5875 0    50   Input ~ 0
 LEDR
 Text GLabel 9275 3525 2    50   Input ~ 0
+LEDR
+Text GLabel 9275 3625 2    50   Input ~ 0
 LEDG
 Text GLabel 8075 4225 0    50   Input ~ 0
 LEDB
@@ -1410,12 +1382,12 @@ OTHER
 $Comp
 L Relay_SolidState:CPC1017N U2
 U 1 1 5DFF31F4
-P 7325 6325
-F 0 "U2" H 7325 6650 50  0000 C CNN
-F 1 "CPC1017N" H 7325 6559 50  0000 C CNN
-F 2 "Package_SO:SOP-4_3.8x4.1mm_P2.54mm" H 7125 6125 50  0001 L CIN
-F 3 "http://www.ixysic.com/home/pdfs.nsf/www/CPC1017N.pdf/$file/CPC1017N.pdf" H 7275 6325 50  0001 L CNN
-	1    7325 6325
+P 7650 6300
+F 0 "U2" H 7650 6625 50  0000 C CNN
+F 1 "CPC1017N" H 7650 6534 50  0000 C CNN
+F 2 "Package_SO:SOP-4_3.8x4.1mm_P2.54mm" H 7450 6100 50  0001 L CIN
+F 3 "http://www.ixysic.com/home/pdfs.nsf/www/CPC1017N.pdf/$file/CPC1017N.pdf" H 7600 6300 50  0001 L CNN
+	1    7650 6300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1433,47 +1405,119 @@ Text GLabel 3350 7425 0    50   Input ~ 0
 HZ1
 Text GLabel 3850 7425 2    50   Input ~ 0
 HZ0
-Text GLabel 7625 6425 2    50   Input ~ 0
+Text GLabel 7950 6400 2    50   Input ~ 0
 HZ0
-Text GLabel 7625 6225 2    50   Input ~ 0
+Text GLabel 7950 6200 2    50   Input ~ 0
 HZ1
 $Comp
 L power:GND #PWR01
 U 1 1 5DFFB045
-P 7025 6425
-F 0 "#PWR01" H 7025 6175 50  0001 C CNN
-F 1 "GND" H 7030 6252 50  0000 C CNN
-F 2 "" H 7025 6425 50  0001 C CNN
-F 3 "" H 7025 6425 50  0001 C CNN
-	1    7025 6425
+P 7350 6400
+F 0 "#PWR01" H 7350 6150 50  0001 C CNN
+F 1 "GND" H 7355 6227 50  0000 C CNN
+F 2 "" H 7350 6400 50  0001 C CNN
+F 3 "" H 7350 6400 50  0001 C CNN
+	1    7350 6400
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R_Small R23
 U 1 1 5DFFC7D9
-P 7025 6050
-F 0 "R23" V 6950 6025 50  0000 C CNN
-F 1 "75" V 7025 6050 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 7025 6050 50  0001 C CNN
-F 3 "~" H 7025 6050 50  0001 C CNN
-	1    7025 6050
+P 7350 6025
+F 0 "R23" V 7275 6000 50  0000 C CNN
+F 1 "85" V 7350 6025 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 7350 6025 50  0001 C CNN
+F 3 "~" H 7350 6025 50  0001 C CNN
+	1    7350 6025
 	1    0    0    1   
 $EndComp
 Wire Wire Line
-	7025 6225 7025 6150
+	7350 6200 7350 6125
 $Comp
 L Device:R_Small R22
 U 1 1 5E007566
-P 7025 5850
-F 0 "R22" V 6950 5825 50  0000 C CNN
-F 1 "75" V 7025 5850 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" H 7025 5850 50  0001 C CNN
-F 3 "~" H 7025 5850 50  0001 C CNN
-	1    7025 5850
+P 7350 5825
+F 0 "R22" V 7275 5800 50  0000 C CNN
+F 1 "85" V 7350 5825 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 7350 5825 50  0001 C CNN
+F 3 "~" H 7350 5825 50  0001 C CNN
+	1    7350 5825
 	1    0    0    1   
 $EndComp
-Text GLabel 7025 5750 1    50   Input ~ 0
+Text GLabel 7350 5725 1    50   Input ~ 0
 HZEN
 Text GLabel 9275 3325 2    50   Input ~ 0
 HZEN
+$Comp
+L LED:QLS6B-FKW D1
+U 1 1 5DFD4E31
+P 9650 6075
+F 0 "D1" H 9650 6442 50  0000 C CNN
+F 1 "QLS6B-FKW" H 9650 6351 50  0000 C CNN
+F 2 "LED_SMD:LED_Cree-PLCC6_4.7x1.5mm" H 9450 5755 50  0001 L CNN
+F 3 "https://www.cree.com/led-components/media/documents/1397-QLS6BFKW.pdf" H 9450 5675 50  0001 L CNN
+	1    9650 6075
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9350 6075 9150 6075
+Wire Wire Line
+	9350 6175 9350 6275
+Wire Wire Line
+	9350 6275 9150 6275
+Wire Wire Line
+	9350 5975 9350 5875
+Wire Wire Line
+	9350 5875 9150 5875
+$Comp
+L power:GND #PWR0102
+U 1 1 5E0306EB
+P 9950 6300
+F 0 "#PWR0102" H 9950 6050 50  0001 C CNN
+F 1 "GND" H 9955 6127 50  0000 C CNN
+F 2 "" H 9950 6300 50  0001 C CNN
+F 3 "" H 9950 6300 50  0001 C CNN
+	1    9950 6300
+	-1   0    0    -1  
+$EndComp
+Connection ~ 9950 6075
+Wire Wire Line
+	9950 6075 9950 5975
+Connection ~ 9950 6175
+Wire Wire Line
+	9950 6175 9950 6075
+Wire Wire Line
+	9950 6175 9950 6300
+Text GLabel 8950 6075 0    50   Input ~ 0
+LEDG
+Text GLabel 8950 6275 0    50   Input ~ 0
+LEDB
+$Comp
+L Device:R_Small R9
+U 1 1 5DF42CF0
+P 9050 6275
+F 0 "R9" V 8975 6250 50  0000 C CNN
+F 1 "27" V 9050 6275 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9050 6275 50  0001 C CNN
+F 3 "~" H 9050 6275 50  0001 C CNN
+	1    9050 6275
+	0    -1   1    0   
+$EndComp
+$Comp
+L Device:C_Small C11
+U 1 1 5E062669
+P 6500 4500
+F 0 "C11" H 6550 4650 50  0000 R CNN
+F 1 "4.7uF" H 6650 4725 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 6500 4500 50  0001 C CNN
+F 3 "~" H 6500 4500 50  0001 C CNN
+	1    6500 4500
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	6325 4400 6500 4400
+Connection ~ 6325 4400
+Wire Wire Line
+	6500 4600 6325 4600
+Connection ~ 6325 4600
 $EndSCHEMATC
