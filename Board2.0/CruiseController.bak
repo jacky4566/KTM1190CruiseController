@@ -942,7 +942,6 @@ Wire Wire Line
 	1925 4500 2050 4500
 NoConn ~ 8075 2325
 NoConn ~ 8075 2825
-NoConn ~ 8075 2725
 NoConn ~ 8075 3425
 NoConn ~ 8075 3725
 NoConn ~ 8075 3825
@@ -951,7 +950,7 @@ NoConn ~ 8075 4125
 NoConn ~ 9275 4125
 NoConn ~ 9275 4025
 NoConn ~ 9275 3725
-NoConn ~ 9275 3325
+NoConn ~ 8075 2725
 NoConn ~ 9275 2825
 $Comp
 L Device:D_Schottky_Small D3
@@ -1334,17 +1333,6 @@ Connection ~ 2050 1175
 Wire Wire Line
 	2050 1175 2350 1175
 $Comp
-L CruiseController-rescue:155124M173200-VeridianDesigns-CruiseController-rescue D1
-U 1 1 5DF31D3A
-P 9225 6175
-F 0 "D1" H 9225 5748 50  0000 C CNN
-F 1 "155124M173200-VeridianDesigns-CruiseController-rescue" H 9225 5839 50  0000 C CNN
-F 2 "LED_155124M173200" H 9525 6425 50  0001 L BNN
-F 3 "Wurth Electronics" H 9525 6325 50  0001 L BNN
-	1    9225 6175
-	-1   0    0    1   
-$EndComp
-$Comp
 L Device:R_Small R17
 U 1 1 5DD8A0BC
 P 4525 6575
@@ -1384,7 +1372,7 @@ L Device:R_Small R21
 U 1 1 5DF45121
 P 9625 6375
 F 0 "R21" V 9550 6350 50  0000 C CNN
-F 1 "75" V 9625 6375 50  0000 C CNN
+F 1 "85" V 9625 6375 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 9625 6375 50  0001 C CNN
 F 3 "~" H 9625 6375 50  0001 C CNN
 	1    9625 6375
@@ -1434,7 +1422,7 @@ Text GLabel 3350 7425 0    50   Input ~ 0
 HZ1
 Text GLabel 3850 7425 2    50   Input ~ 0
 HZ0
-Text GLabel 7650 6425 2    50   Input ~ 0
+Text GLabel 7625 6425 2    50   Input ~ 0
 HZ0
 Text GLabel 7625 6225 2    50   Input ~ 0
 HZ1
@@ -1454,7 +1442,7 @@ L Device:R_Small R23
 U 1 1 5DFFC7D9
 P 7025 6050
 F 0 "R23" V 6950 6025 50  0000 C CNN
-F 1 "75" V 7025 6050 50  0000 C CNN
+F 1 "85" V 7025 6050 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 7025 6050 50  0001 C CNN
 F 3 "~" H 7025 6050 50  0001 C CNN
 	1    7025 6050
@@ -1467,7 +1455,7 @@ L Device:R_Small R22
 U 1 1 5E007566
 P 7025 5850
 F 0 "R22" V 6950 5825 50  0000 C CNN
-F 1 "75" V 7025 5850 50  0000 C CNN
+F 1 "85" V 7025 5850 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 7025 5850 50  0001 C CNN
 F 3 "~" H 7025 5850 50  0001 C CNN
 	1    7025 5850
@@ -1475,6 +1463,28 @@ F 3 "~" H 7025 5850 50  0001 C CNN
 $EndComp
 Text GLabel 7025 5750 1    50   Input ~ 0
 HZEN
-Text GLabel 7950 4050 0    50   Input ~ 0
+Text GLabel 9275 3325 2    50   Input ~ 0
 HZEN
+$Comp
+L Device:LED_RGB D?
+U 1 1 5DFB533B
+P 9325 6175
+F 0 "D?" H 9325 5708 50  0000 C CNN
+F 1 "LED_RGB" H 9325 5799 50  0000 C CNN
+F 2 "" H 9325 6125 50  0001 C CNN
+F 3 "~" H 9325 6125 50  0001 C CNN
+	1    9325 6175
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8925 6175 8925 5975
+Wire Wire Line
+	8925 5975 9125 5975
+Wire Wire Line
+	9125 6175 8925 6175
+Wire Wire Line
+	9125 6375 8925 6375
+Wire Wire Line
+	8925 6375 8925 6175
+Connection ~ 8925 6175
 $EndSCHEMATC
