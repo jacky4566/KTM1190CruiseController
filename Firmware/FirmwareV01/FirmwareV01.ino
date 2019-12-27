@@ -3,11 +3,15 @@
 #include <EEPROM.h>
 #include <STM32L4_CAN.h>
 
+//#define channelAinveted
+//#define channelBinveted
+
 //Pins
 const int pinAnalogA = 0;
 const int pinAnalogB = 1;
 const int pinOutputA = PIN_DAC0;
 const int pinOutputB = PIN_DAC1;
+const int pinInterSW = PIN_DAC0;
 const int pinRedLED = 30;
 const int pinGreenLED = 10;
 const int pinBlueLED = 8;
@@ -19,6 +23,12 @@ const int pinButtonMID = 22;
 Bounce debouncerUP = Bounce();
 Bounce debouncerDOWN = Bounce();
 Bounce debouncerMID = Bounce();
+const int debounceTime = 5;  //ms
+
+//IO globals
+const double inputTolerance = 0.05; //5% tolerance on adc inputs
+double handThrottlePOS;
+double outputThrottle;
 
 //Can
 STM32L4_CAN cancan;
@@ -35,6 +45,8 @@ uint8_t canECUIntervention;
 
 //Globals
 int error = 0;
+boolean cruiseEN = false;
+double cruiseSetSpeed = 0;
 
 //PID
 double PIDwheelSpeed, PIDoutputThrottle, PIDcruiseSetSpeed;
@@ -43,11 +55,13 @@ PID cruisePID(&wheelSpeed, &outputThrottle, &cruiseSetSpeed, Kp, Ki, Kd, DIRECT)
 
 //EEPROM
 struct configurationFile {
-  uint16_t TPSAMAX;
-  uint16_t TPSAMIN;
-  uint16_t TPSBMAX;
-  uint16_t TPSBMIN;
-  uint16_t ConfigDone;
+  double TPSAMAX = 0;
+  double TPSAMIN = 0;
+  double TPSARANGE = 0;
+  double TPSBMAX = 0;
+  double TPSBMIN = 0;
+  double TPSBRANGE = 0;
+  uint16_t ConfigDone; //should read 0x0f7f
 } currentConfig;
 
 void setup() {
@@ -55,30 +69,30 @@ void setup() {
 
   //Pin IO
   debouncerUP.attach(pinButtonUP);
-  debouncerUP.interval(6);
+  debouncerUP.interval(debounceTime);
   debouncerDOWN.attach(pinButtonDOWN);
-  debouncerDOWN.interval(6);
+  debouncerDOWN.interval(debounceTime);
   debouncerMID.attach(pinButtonMID);
-  debouncerMID.interval(6);
-  analogReadPeriod(2); //2 is default, can be lengthened for smoothing
-  analogReadResolution(12);
-  analogWriteResolution(12);
+  debouncerMID.interval(debounceTime);
+  analogReadPeriod(4); 		//2 is default, can be lengthened up to 7 for smoothing
+  analogReadResolution(12);	//use full 12bit mode
+  analogWriteResolution(12);//use full 12bit mode
 
-  //Math
+  //PID
   cruisePID.SetMode(AUTOMATIC);
   cruisePID.SetSampleTime(10);
 
   //check for setup mode
-  debouncerMID.update();
+  debouncerUP.update();
   delay(5);
-  debouncerMID.update();
-  if (debouncerMID.read() == LOW) {
-    while (debouncerMID.read() == LOW && debouncerMID.duration() < 5000) {
+  debouncerUP.update();
+  if (debouncerUP.read() == LOW) {
+    while (debouncerUP.read() == LOW && debouncerUP.duration() < 5000) {
       LEDupdate(setupTimer % 0x3ff, 0, 0); //pulse red
-      debouncerMID.update();
+      debouncerUP.update();
       delayMicroseconds(10);
     }
-    if (debouncerMID.duration() >= 5000) { //pin was held long enough for setup mode
+    if (debouncerUP.duration() >= 5000) { //pin was held long enough for setup mode
       setupMode();
     }
   }
@@ -89,31 +103,12 @@ void setup() {
 
 void loop() {
   //Inputs
-  CANprocessor();
-  readIO();
-  //process information
-  Cruiseprocessor();
+  error = CANprocessor();
+  error = readIO();
   //Outputs
-  calcOutputs();
+  error = calcOutputs();
   //Teritary User Interface
   UIprocessor();
-}
-
-void Cruiseprocessor() {
-  static boolean cruiseEN = false;
-  if (sanityChecker()) { //Check all the new information is good.
-	PIDwheelSpeed = (double)canRWHEEL;
-	cruisePID.Compute();
-  } else { //something is not right, disable cruise
-    cruiseEN = false;
-  }
-}
-
-boolean sanityChecker() {
-  if (canECUIntervention) { //Some ecu intervention took place
-    canECUIntervention = 0;
-    return 1;
-  }
 }
 
 void configINIT() {
@@ -138,17 +133,51 @@ void LEDupdate(uint32_t R, uint32_t G, uint32_t B) {
 }
 
 
-void readIO() { //Read all the appropriate signals, Check for errors
-  debouncerUP.update();
-  debouncerMID.update();
-  debouncerDOWN.update();
-  inputA = analogRead(pinAnalogA);
-  inputB = analogRead(pinAnalogB);
+byte readIO() { //Read all the appropriate signals, Check for errors
+	//BUTTONS
+	debouncerUP.update();
+	debouncerMID.update();
+	debouncerDOWN.update();
+	
+	//button processing
+	if (short press up){
+	}
+	else if (long press up){
+	}
+	else if (short press down){
+	}
+	else if (long press down){
+	}
+	
+	//TPS
+	double ADCinputA = (double)analogRead(pinAnalogA);
+	double ADCinputB = (double)analogRead(pinAnalogB);
+	if (ADCinputA  <= currentConfig.TPSAMIN * (1 - inputTolerance)){
+		return 1;
+	} else if(ADCinputB  <= currentConfig.TPSBMIN * (1 - inputTolerance)){
+		return 2;
+	}else if(ADCinputA  >= currentConfig.TPSAMAX * (1 + inputTolerance)){
+		return 3;
+	}else if(ADCinputB  <= currentConfig.TPSBMAX * (1 + inputTolerance)){
+		return 4;
+	}else{
+		handThrottlePOS = ((ADCinputA - currentConfig.TPSAMIN)/(currentConfig.TPSARANGE) + (ADCinputB - currentConfig.TPSBMIN)/(currentConfig.TPSBRANGE)) / 2;
+	}
+	return 0;
 }
 
 void calcOutputs() {
-  analogWrite(pinOutputA, outputA);
-  analogWrite(pinOutputB, outputB);
+	if (cruiseEN && error == 0){
+		digitalWrite(pinInterSW, HIGH);
+		PIDwheelSpeed = (double)canRWHEEL;
+		cruisePID.Compute();
+		analogWrite(pinOutputA, (outputThrottle * currentConfig.TPSARANGE) + currentConfig.TPSAMIN);
+		analogWrite(pinOutputB, (outputThrottle * currentConfig.TPSBRANGE) + currentConfig.TPSBMIN);
+	}else{
+		digitalWrite(pinInterSW, LOW);
+		STM32.Sleep();//cruise isnt doing much of anything here. 
+	}
+	
 }
 
 void UIprocessor() {
@@ -200,7 +229,41 @@ void LEDupdate(uint32_t R, uint32_t G, uint32_t B) {
   analogWrite(pinBlueLED, B & 0x3FF);
 }
 
-void CANprocessor() {
+void setupMode(){
+	configurationFile newConfig;
+	newConfig.TPSAMAX = channelA;
+	newConfig.TPSAMIN = channelA;
+	newConfig.TPSBMAX = channelB;
+	newConfig.TPSBMIN = channelB;
+	while(debouncerUP.read() == LOW){
+		LEDupdate(millis() % 0x3ff, 0, 0); //pulse red
+		channelA = analogRead(pinAnalogA);
+		channelB = analogRead(pinAnalogB);
+		debouncerUP.update();
+		//Get the boundary conditions as users twists throttle
+		if (channelA < newConfig.TPSAMIN){
+			newConfig.TPSAMIN = channelA;
+		}
+		if (channelA > newConfig.TPSAMAX){
+			newConfig.TPSAMAX = channelA;
+		}
+		if (channelB < newConfig.TPSBMIN){
+			newConfig.TPSAMIN = channelB;
+		}
+		if (channelB < newConfig.TPSBMIN){
+			newConfig.TPSAMIN = channelB;
+		}
+	}
+	newConfig.TPSARANGE = (newConfig.TPSAMAX - newConfig.TPSAMIN);
+	newConfig.TPSBRANGE = (newConfig.TPSBMAX - newConfig.TPSBMIN);
+	newConfig.ConfigDone = 0x0f7f;
+	if (STM32.getVREF() >= 2.0){ //check for good power supply
+		EEPROM.put(0, newConfig); //write to memory
+	}
+	currentConfig = newConfig;
+}
+
+byte CANprocessor() {
   static uint32_t lastCANtime;
   while (cancan.CANMsgAvail()) {
     CAN_msg_t canRXmsg;
@@ -253,6 +316,8 @@ void CANprocessor() {
     }
   }
   if ((lastCANtime + 1000) <= millis()) {
-    error = 5;
+    return 5;
+  }else {
+	  return 0;
   }
 }
