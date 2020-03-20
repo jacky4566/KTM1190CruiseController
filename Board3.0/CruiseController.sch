@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:CruiseController-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
@@ -282,7 +282,7 @@ Wire Wire Line
 Wire Wire Line
 	9300 1275 9725 1275
 $Comp
-L MargoGeneral:MIC5225 U5
+L CruiseController-rescue:MIC5225-MargoGeneral U5
 U 1 1 5DC6F376
 P 5375 4650
 F 0 "U5" H 5650 5125 50  0000 C CNN
@@ -775,7 +775,7 @@ L Device:R_Small R1
 U 1 1 5DFDD2B1
 P 7875 1925
 F 0 "R1" V 7800 1950 50  0000 C CNN
-F 1 "10k" V 7875 1925 50  0000 C CNN
+F 1 "2.2k" V 7875 1925 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" H 7875 1925 50  0001 C CNN
 F 3 "~" H 7875 1925 50  0001 C CNN
 	1    7875 1925
@@ -794,8 +794,6 @@ Text GLabel 3350 6725 0    50   Input ~ 0
 BOOT0
 Text Notes 5525 4750 0    50   ~ 0
 150mA
-Wire Wire Line
-	4625 4400 4850 4400
 Text GLabel 2025 3300 0    50   Input ~ 0
 TTAIN
 Text GLabel 8075 3125 0    50   Input ~ 0
@@ -852,8 +850,7 @@ F 3 "~" H 1250 6925 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 5275 4400
-Connection ~ 4850 4400
-Text GLabel 4625 4400 0    50   Input ~ 0
+Text GLabel 4650 4400 0    50   Input ~ 0
 VIN
 $Comp
 L Device:C_Small C1
@@ -974,27 +971,21 @@ Text GLabel 3350 7325 0    50   Input ~ 0
 VIN
 Connection ~ 3725 3575
 Connection ~ 3725 2725
-Connection ~ 3300 4600
 Wire Wire Line
-	3300 4400 3300 4600
+	3150 5400 3150 5550
 Wire Wire Line
-	3400 4400 3300 4400
-Wire Wire Line
-	3300 4600 3300 4650
-Wire Wire Line
-	3400 4600 3300 4600
+	3250 5400 3150 5400
 $Comp
 L CruiseController-rescue:TLV9064IRTER-VeridianDesigns-CruiseController-rescue U3
 U 2 1 5DCBC2C3
-P 3700 4500
-F 0 "U3" H 3700 4867 50  0000 C CNN
-F 1 "TLV9064IRTER" H 3700 4776 50  0000 C CNN
-F 2 "Package_DFN_QFN:QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm" H 3650 4600 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tlv9064.pdf" H 3750 4700 50  0001 C CNN
-	2    3700 4500
+P 3550 5300
+F 0 "U3" H 3550 5667 50  0000 C CNN
+F 1 "TLV9064IRTER" H 3550 5576 50  0000 C CNN
+F 2 "Package_DFN_QFN:QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm" H 3500 5400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tlv9064.pdf" H 3600 5500 50  0001 C CNN
+	2    3550 5300
 	1    0    0    -1  
 $EndComp
-NoConn ~ 4000 4500
 Text GLabel 3350 7025 0    50   Input ~ 0
 3V3
 Connection ~ 4525 7025
@@ -1088,12 +1079,12 @@ $EndComp
 $Comp
 L power:GND #PWR0110
 U 1 1 5E19D1C9
-P 3300 4650
-F 0 "#PWR0110" H 3300 4400 50  0001 C CNN
-F 1 "GND" H 3305 4477 50  0000 C CNN
-F 2 "" H 3300 4650 50  0001 C CNN
-F 3 "" H 3300 4650 50  0001 C CNN
-	1    3300 4650
+P 3050 5200
+F 0 "#PWR0110" H 3050 4950 50  0001 C CNN
+F 1 "GND" H 3055 5027 50  0000 C CNN
+F 2 "" H 3050 5200 50  0001 C CNN
+F 3 "" H 3050 5200 50  0001 C CNN
+	1    3050 5200
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -1446,4 +1437,13 @@ F 3 "~" H 8050 5925 50  0001 C CNN
 	1    8050 5925
 	0    -1   -1   0   
 $EndComp
+Wire Wire Line
+	3150 5550 3850 5550
+Wire Wire Line
+	3850 5550 3850 5300
+Wire Wire Line
+	3050 5200 3250 5200
+Wire Wire Line
+	4650 4400 4850 4400
+Connection ~ 4850 4400
 $EndSCHEMATC
