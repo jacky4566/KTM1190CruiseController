@@ -4,6 +4,12 @@
 
 #include <STM32L4_CAN.h>
 
+const int pinRedLED = 30;
+const int pinGreenLED = 10;
+const int pinBlueLED = 5;
+
+uint32_t ledTimer;
+
 STM32L4_CAN cancan;
 
 //CAN information
@@ -19,6 +25,10 @@ uint8_t canECUIntervention;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(pinGreenLED, OUTPUT);
+  digitalWrite(pinGreenLED, HIGH);
+  delay(1000);
+  digitalWrite(pinGreenLED, LOW);
 }
 
 void loop() {
@@ -50,6 +60,8 @@ void loop() {
 
 void CANprocessor() {
   while (cancan.CANMsgAvail()) {
+    digitalWrite(pinGreenLED, HIGH);
+    ledTimer = millis();
     CAN_msg_t canRXmsg;
     cancan.CANReceive(&canRXmsg);
     switch (canRXmsg.id) {
@@ -98,5 +110,8 @@ void CANprocessor() {
         }
         break;
     }
+  }
+  if (ledTimer + 50 < millis()){
+    digitalWrite(pinGreenLED, LOW);
   }
 }
